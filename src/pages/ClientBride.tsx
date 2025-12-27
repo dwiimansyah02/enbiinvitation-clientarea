@@ -14,11 +14,11 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import '../DefaultViewport.css'
+import './DefaultViewport.css'
 import { useEffect, useState } from 'react';
-import { UserData, fetchUserById } from '../../utils/fetchUser';
-import { ClientData, fetchClientByUserId } from '../../utils/fetchClient';
-import { GalleryData, GiftData, fetchClientGalleryByUserId, fetchClientGiftByUserId } from '../../utils/fetchClientAdditional';
+import { UserData, fetchUserById } from '../utils/fetchUser';
+import { ClientData, fetchClientByUserId } from '../utils/fetchClient';
+import { GalleryData, GiftData, fetchClientGalleryByUserId, fetchClientGiftByUserId } from '../utils/fetchClientAdditional';
 
 interface InfoItemProps {
   title: string;
@@ -47,7 +47,7 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ alt, src }) => (
   </IonImg>
 );
 
-const HomeBride: React.FC = () => {
+const ClientBride: React.FC = () => {
 
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<UserData | null>(null);
@@ -202,4 +202,4 @@ const HomeBride: React.FC = () => {
   );
 };
 
-export default HomeBride;
+export default ClientBride;

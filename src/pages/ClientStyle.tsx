@@ -12,8 +12,8 @@ import {
 } from '@ionic/react';
 import '../DefaultViewport.css'
 import { useEffect, useState } from 'react';
-import { UserData, fetchUserById } from '../../utils/fetchUser';
-import { StyleData, fetchClientStyleByUserId } from '../../utils/fetchClientAdditional';
+import { UserData, fetchUserById } from '../utils/fetchUser';
+import { StyleData, fetchClientStyleByUserId } from '../utils/fetchClientAdditional';
 
 interface InfoItemProps {
   title: string;
@@ -29,7 +29,7 @@ const InfoItem: React.FC<InfoItemProps> = ({ title, subtitle }) => (
   </IonItem>
 );
 
-const HomeStyle: React.FC = () => {
+const ClientStyle: React.FC = () => {
 
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<UserData | null>(null);
@@ -118,4 +118,4 @@ const HomeStyle: React.FC = () => {
   );
 };
 
-export default HomeStyle;
+export default ClientStyle;

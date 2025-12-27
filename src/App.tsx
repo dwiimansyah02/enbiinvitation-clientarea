@@ -61,6 +61,8 @@ const App: React.FC = () => (
         <Route exact path="/auth/login" component={Login} />
 
         <ProtectedRoute exact path="/home" component={Home} />
+        <ProtectedRoute exact path="/client" component={Home} />
+        <ProtectedRoute exact path="/client/gift" component={Home} />
         <ProtectedRoute exact path="/guestbook" component={GuestBook} />
         <ProtectedRoute exact path="/rsvp" component={Rsvp} />
         <ProtectedRoute exact path="/settings" component={Settings} />
