@@ -59,7 +59,7 @@ const HomeStyle: React.FC = () => {
   }, []);
 
   return (
-    <IonPage id="bride-page">
+    <IonPage id="style-page">
       <IonHeader translucent>
         <IonToolbar>
           <IonTitle>Gaya Undangan</IonTitle>
