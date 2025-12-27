@@ -134,9 +134,25 @@ const GuestBook: React.FC = () => {
           {filteredGuests.map((guest) => (
             <IonItemSliding key={guest.id}>
               <IonItemOptions side="start">
-                <IonItemOption color="primary" onClick={() => handleCopy(guest, presentToast)}>Salin</IonItemOption>
+                <IonItemOption
+                  color="primary"
+                  onClick={(e) => {
+                    handleCopy(guest, presentToast);
+                    (e.currentTarget.closest('ion-item-sliding') as any)?.close();
+                  }}
+                >
+                  Salin
+                </IonItemOption>
                 {guest.phone && (
-                  <IonItemOption color="success" onClick={() => handleWhatsapp(guest)}>Whatsapp</IonItemOption>
+                  <IonItemOption
+                    color="success"
+                    onClick={(e) => {
+                      handleWhatsapp(guest);
+                      (e.currentTarget.closest('ion-item-sliding') as any)?.close();
+                    }}
+                  >
+                    Whatsapp
+                  </IonItemOption>
                 )}
               </IonItemOptions>
               <IonItem>
@@ -147,8 +163,24 @@ const GuestBook: React.FC = () => {
                 <p>{guest.category}</p>
               </IonItem>
               <IonItemOptions side="end">
-                <IonItemOption color="warning" onClick={() => handleEdit(guest)}>Edit</IonItemOption>
-                <IonItemOption color="danger" onClick={() => handleDelete(guest)}>Hapus</IonItemOption>
+                <IonItemOption
+                  color="warning"
+                  onClick={(e) => {
+                    handleEdit(guest);
+                    (e.currentTarget.closest('ion-item-sliding') as any)?.close();
+                  }}
+                >
+                  Edit
+                </IonItemOption>
+                <IonItemOption
+                  color="danger"
+                  onClick={(e) => {
+                    handleDelete(guest);
+                    (e.currentTarget.closest('ion-item-sliding') as any)?.close();
+                  }}
+                >
+                  Hapus
+                </IonItemOption>
               </IonItemOptions>
             </IonItemSliding>
           ))}
