@@ -1,6 +1,6 @@
 import {
   IonIcon,
-  IonTab,
+  IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
@@ -10,35 +10,36 @@ import { colorPaletteOutline, homeOutline, mailUnreadOutline } from 'ionicons/ic
 import HomeDashboard from './components/HomeDashboard';
 import HomeBride from './components/HomeBride';
 import HomeStyle from './components/HomeStyle';
+import { IonReactRouter } from '@ionic/react-router';
+import { Redirect, Route } from 'react-router';
 
 const Home: React.FC = () => {
 
   return (
-    <IonTabs>
-      <IonTab tab="home">
-        <HomeDashboard />
-      </IonTab>
-      <IonTab tab="bride">
-        <HomeBride />
-      </IonTab>
-      <IonTab tab="style">
-        <HomeStyle />
-      </IonTab>
-      <IonTabBar slot="bottom">
-        <IonTabButton tab="home">
-          <IonIcon icon={homeOutline} />
-          Beranda
-        </IonTabButton>
-        <IonTabButton tab="bride">
-          <IonIcon icon={mailUnreadOutline} />
-          Data Mempelai
-        </IonTabButton>
-        <IonTabButton tab="style">
-          <IonIcon icon={colorPaletteOutline} />
-          Gaya Undangan
-        </IonTabButton>
-      </IonTabBar>
-    </IonTabs>
+    <IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Redirect exact path="/" to="/home" />
+          <Route path="/home" render={() => <HomeDashboard />} exact={true} />
+          <Route path="/bride" render={() => <HomeBride />} exact={true} />
+          <Route path="/style" render={() => <HomeStyle />} exact={true} />
+        </IonRouterOutlet>
+        <IonTabBar slot="bottom">
+          <IonTabButton tab="home" href="/home">
+            <IonIcon icon={homeOutline} />
+            Beranda
+          </IonTabButton>
+          <IonTabButton tab="bride" href="/bride">
+            <IonIcon icon={mailUnreadOutline} />
+            Data Mempelai
+          </IonTabButton>
+          <IonTabButton tab="style" href="/style">
+            <IonIcon icon={colorPaletteOutline} />
+            Gaya Undangan
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
+    </IonReactRouter>
   );
 };
 
