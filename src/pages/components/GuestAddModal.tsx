@@ -19,19 +19,22 @@ import { fetchUserById, UserData } from '../../utils/fetchUser';
 
 interface GuestAddModalProps {
   modalOpen: boolean;
+  loading?: boolean;
+  setLoading?: (loading: boolean) => void;
   onClose?: () => void;
   onSuccess?: () => void;
 }
 
 const GuestAddModal: React.FC<GuestAddModalProps> = ({
   modalOpen,
+  loading,
+  setLoading,
   onClose,
   onSuccess
 }) => {
   const [presentToast] = useIonToast();
   
   const [user, setUser] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true);
 
   const [clientId, setClientId] = useState('');
   const [guestName, setGuestName] = useState('');
@@ -50,7 +53,7 @@ const GuestAddModal: React.FC<GuestAddModalProps> = ({
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false);
+        setLoading?.(false);
       }
     };
 
@@ -59,6 +62,7 @@ const GuestAddModal: React.FC<GuestAddModalProps> = ({
 
   const handleSubmit = async () => {
     try {
+      setLoading?.(true);
       const token = localStorage.getItem('auth_token');
       if (!token) throw new Error('Token not found');
 
@@ -88,6 +92,7 @@ const GuestAddModal: React.FC<GuestAddModalProps> = ({
 
       onSuccess?.();
       onClose?.();
+      setLoading?.(false);
     } catch (error) {
       presentToast({
         message: 'Gagal menyimpan tamu',

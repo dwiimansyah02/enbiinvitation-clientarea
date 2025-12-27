@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonTitle, IonToolbar, useIonToast, IonSearchbar, IonButtons, IonButton, IonActionSheet, IonIcon, IonBackButton } from '@ionic/react';
+import { IonContent, IonHeader, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonPage, IonTitle, IonToolbar, useIonToast, IonSearchbar, IonButtons, IonButton, IonActionSheet, IonIcon, IonBackButton, IonSkeletonText } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { fetchGuestById, GuestData } from '../utils/fetchGuest'
 import { fetchUserById, UserData } from '../utils/fetchUser';
@@ -9,6 +9,7 @@ import GuestEditModal from './components/GuestEditModal';
 import { handleCopy } from './components/handleCopy';
 import { handleWhatsapp } from './components/handleWhatsapp';
 import axios from 'axios';
+import { addCircleOutline, copyOutline, createOutline, logoWhatsapp, trashOutline } from 'ionicons/icons';
 
 const GuestBook: React.FC = () => {
 
@@ -23,18 +24,11 @@ const GuestBook: React.FC = () => {
   const [isEditModal, setIsEditModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
 
-
   useEffect(() => {
     const userId = localStorage.getItem('user_id');
-    if (!userId) {
-      setLoading(false);
-      return;
-    }
-
     fetchUserById(Number(userId))
       .then(setUser)
-      .catch(console.error)
-      .finally(() => setLoading(false));
+      .catch(console.error);
   }, []);
 
   const loadGuests = async () => {
@@ -44,6 +38,8 @@ const GuestBook: React.FC = () => {
       setGuests(data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -116,7 +112,9 @@ const GuestBook: React.FC = () => {
             <IonBackButton defaultHref="/home"></IonBackButton>
           </IonButtons>
           <IonButtons slot="end">
-            <IonButton onClick={() => setIsAddModal(true)}>Tambah Tamu</IonButton>
+            <IonButton onClick={() => setIsAddModal(true)}>
+              <IonIcon icon={addCircleOutline} />
+            </IonButton>
           </IonButtons>
           <IonTitle>Buku Tamu</IonTitle>
         </IonToolbar>
@@ -130,9 +128,38 @@ const GuestBook: React.FC = () => {
             <IonTitle size="large">Buku Tamu</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonList>
+        {loading ? (
+          <IonList>
+            {Array.from({ length: 10 }).map((_, index) => (
+              <IonItem key={index}>
+                <IonLabel>
+                  <IonSkeletonText
+                    animated
+                    style={{ width: '80%', height: '20px' }}
+                  />
+                  <IonSkeletonText
+                    animated
+                    style={{ width: '60%', height: '15px', marginTop: '8px' }}
+                  />
+                </IonLabel>
+                <IonSkeletonText
+                  animated
+                  style={{ width: '40px', height: '20px' }}
+                />
+              </IonItem>
+            ))}
+          </IonList>
+        ) : (
+        <IonList inset={true}>
           {filteredGuests.map((guest) => (
             <IonItemSliding key={guest.id}>
+              <IonItem button={true}>
+                <IonLabel>
+                  <strong>{guest.name}</strong>
+                  <p>{guest.phone}</p>
+                </IonLabel>
+                <p>{guest.category}</p>
+              </IonItem>
               <IonItemOptions side="start">
                 <IonItemOption
                   color="primary"
@@ -141,7 +168,7 @@ const GuestBook: React.FC = () => {
                     (e.currentTarget.closest('ion-item-sliding') as any)?.close();
                   }}
                 >
-                  Salin
+                  <IonIcon slot="icon-only" icon={copyOutline}></IonIcon>
                 </IonItemOption>
                 {guest.phone && (
                   <IonItemOption
@@ -151,17 +178,10 @@ const GuestBook: React.FC = () => {
                       (e.currentTarget.closest('ion-item-sliding') as any)?.close();
                     }}
                   >
-                    Whatsapp
+                    <IonIcon slot="icon-only" icon={logoWhatsapp}></IonIcon>
                   </IonItemOption>
                 )}
               </IonItemOptions>
-              <IonItem>
-                <IonLabel>
-                  <strong>{guest.name}</strong>
-                  <p>{guest.phone}</p>
-                </IonLabel>
-                <p>{guest.category}</p>
-              </IonItem>
               <IonItemOptions side="end">
                 <IonItemOption
                   color="warning"
@@ -170,7 +190,7 @@ const GuestBook: React.FC = () => {
                     (e.currentTarget.closest('ion-item-sliding') as any)?.close();
                   }}
                 >
-                  Edit
+                  <IonIcon slot="icon-only" icon={createOutline}></IonIcon>
                 </IonItemOption>
                 <IonItemOption
                   color="danger"
@@ -179,14 +199,15 @@ const GuestBook: React.FC = () => {
                     (e.currentTarget.closest('ion-item-sliding') as any)?.close();
                   }}
                 >
-                  Hapus
+                  <IonIcon slot="icon-only" icon={trashOutline}></IonIcon>
                 </IonItemOption>
               </IonItemOptions>
             </IonItemSliding>
           ))}
         </IonList>
-        <GuestAddModal modalOpen={isAddModal} onClose={() => setIsAddModal(false)} onSuccess={() => loadGuests()} />
-        <GuestEditModal modalOpen={isEditModal} selectedId={selectedGuest?.id} onClose={() => setIsEditModal(false)} onSuccess={() => loadGuests()} />
+        )}
+        <GuestAddModal loading={loading} setLoading={setLoading} modalOpen={isAddModal} onClose={() => setIsAddModal(false)} onSuccess={() => loadGuests()} />
+        <GuestEditModal loading={loading} setLoading={setLoading} modalOpen={isEditModal} selectedId={selectedGuest?.id} onClose={() => setIsEditModal(false)} onSuccess={() => loadGuests()} />
         <IonActionSheet
           isOpen={isDelete}
           header="Kamu yakin ingin menghapus tamu ini?"

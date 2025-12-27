@@ -23,6 +23,8 @@ import axios from 'axios';
 interface GuestEditModalProps {
   selectedId?: number;
   modalOpen: boolean;
+  loading?: boolean;
+  setLoading?: (loading: boolean) => void;
   onClose?: () => void;
   onSuccess?: () => void;
 }
@@ -30,12 +32,12 @@ interface GuestEditModalProps {
 const GuestEditModal: React.FC<GuestEditModalProps> = ({
   selectedId,
   modalOpen,
+  loading,
+  setLoading,
   onClose,
   onSuccess
 }) => {
   const [presentToast] = useIonToast();
-
-  const [loading, setLoading] = useState(true);
 
   const [guestName, setGuestName] = useState('');
   const [categoryEdit, setCategory] = useState('');
@@ -47,7 +49,7 @@ const GuestEditModal: React.FC<GuestEditModalProps> = ({
     const fetchGuestDetail = async () => {
       if (!selectedId || !modalOpen) return;
 
-      setLoading(true);
+      setLoading?.(true);
     
       try {
         const token = localStorage.getItem('auth_token');
@@ -67,7 +69,7 @@ const GuestEditModal: React.FC<GuestEditModalProps> = ({
         setCategory(guest.category ?? '');
         setPhone(guest.phone ?? '');
         setErrors({});
-        setLoading(false);
+        setLoading?.(false);
       } catch (err: any) {
         presentToast({
           message: 'Gagal mengambil data tamu',
@@ -83,6 +85,7 @@ const GuestEditModal: React.FC<GuestEditModalProps> = ({
   
   const handleSave = async () => {
     setErrors({});
+    setLoading?.(true);
     
     const newErrors: { guestName?: string; category?: string } = {};
     if (!guestName.trim()) newErrors.guestName = 'Nama tamu wajib diisi';
@@ -133,6 +136,7 @@ const GuestEditModal: React.FC<GuestEditModalProps> = ({
     
       onClose?.();
       onSuccess?.();
+      setLoading?.(false);
       
     } catch (err: any) {
       presentToast({
