@@ -127,7 +127,7 @@ const GuestBook: React.FC = () => {
       <IonContent fullscreen={true} className="ion-padding">
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Header</IonTitle>
+            <IonTitle size="large">Buku Tamu</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonList>
