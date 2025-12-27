@@ -1,4 +1,6 @@
 import {
+  IonBackButton,
+  IonButtons,
   IonContent,
   IonHeader,
   IonImg,
@@ -10,7 +12,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import '../DefaultViewport.css'
+import './DefaultViewport.css'
 import { useEffect, useState } from 'react';
 import { UserData, fetchUserById } from '../utils/fetchUser';
 import { StyleData, fetchClientStyleByUserId } from '../utils/fetchClientAdditional';
@@ -62,6 +64,9 @@ const ClientStyle: React.FC = () => {
     <IonPage id="style-page">
       <IonHeader translucent>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/home"></IonBackButton>
+          </IonButtons>
           <IonTitle>Gaya Undangan</IonTitle>
         </IonToolbar>
       </IonHeader>

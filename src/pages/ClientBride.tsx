@@ -1,5 +1,7 @@
 import {
   IonAvatar,
+  IonBackButton,
+  IonButtons,
   IonCol,
   IonContent,
   IonGrid,
@@ -86,6 +88,9 @@ const ClientBride: React.FC = () => {
     <IonPage id="bride-page">
       <IonHeader translucent>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/home"></IonBackButton>
+          </IonButtons>
           <IonTitle>Data Mempelai</IonTitle>
         </IonToolbar>
       </IonHeader>

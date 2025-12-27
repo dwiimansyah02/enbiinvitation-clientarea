@@ -133,6 +133,8 @@ const Home: React.FC = () => {
             </IonList>
         
             <div className="space-y-2">
+              <IonButton expand="block" onClick={() => history.push('/client/bride')}>Data Mempelai</IonButton>
+              <IonButton expand="block" onClick={() => history.push('/client/style')}>Gaya Undangan</IonButton>
               <IonButton expand="block" onClick={() => history.push('/guestbook')}>Buku tamu</IonButton>
               <IonButton expand="block" onClick={() => history.push('/rsvp')}>RSVP</IonButton>
               <IonButton expand="block" onClick={() => history.push('/settings')}>Pengaturan</IonButton>
