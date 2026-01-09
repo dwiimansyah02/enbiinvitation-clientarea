@@ -12,7 +12,7 @@ export const handleWhatsapp = async (
     }
 
     const baseUrl = "https://api.whatsapp.com/send";
-    const invitationUrl = `https://enbiinvitation.com/${guest.client_url}`;
+    const invitationUrl = `https://khitan.enbiinvitation.com/${guest.client_url}`;
     const to = guest.name;
 
     const encodedInvitationUrl = `${invitationUrl}?to=${encodeURIComponent(to)}`;

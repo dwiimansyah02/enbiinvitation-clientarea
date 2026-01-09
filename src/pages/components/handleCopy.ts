@@ -6,7 +6,7 @@ export const handleCopy = async (
 ) => {
   if (!guest) return;
 
-  const invitationUrl = `https://enbiinvitation.com/${guest.client_url}`;
+  const invitationUrl = `https://khitan.enbiinvitation.com/${guest.client_url}`;
   const encodedInvitationUrl =
     `${invitationUrl}?to=${encodeURIComponent(guest.name)}`;
 
