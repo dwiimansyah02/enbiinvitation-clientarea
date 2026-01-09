@@ -26,7 +26,7 @@ export const handleWhatsapp = async (
     "",
     encodedInvitationUrl,
     "",
-    "Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan kepada anak kami dalam acara khitan anak kami.",
+    "Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa kepada anak kami dalam acara khitan anak kami.",
     "",
     "*Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.*",
     "",
