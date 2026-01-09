@@ -19,7 +19,7 @@ export const handleCopy = async (
     "",
     encodedInvitationUrl,
     "",
-    "Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu kepada kami dalam menapaki lembaran baru perjalanan hidup.",
+    "Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu kepada anak kami dalam acara khitan anak kami.",
     "",
     "*Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.*",
     "",

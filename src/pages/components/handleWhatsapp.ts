@@ -17,23 +17,23 @@ export const handleWhatsapp = async (
 
     const encodedInvitationUrl = `${invitationUrl}?to=${encodeURIComponent(to)}`;
 
-    const text = [
-      "_Assalamualaikum Warahmatullahi Wabarakatuh_",
-      "",
-      `Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i *${guest.name}* untuk menghadiri acara kami.`,
-      "",
-      "*Berikut link undangan kami*, untuk info lengkap dari acara bisa kunjungi :",
-      "",
-      encodedInvitationUrl,
-      "",
-      "Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu kepada kami dalam menapaki lembaran baru perjalanan hidup.",
-      "",
-      "*Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.*",
-      "",
-      "Terima kasih banyak atas perhatiannya.",
-      "",
-      "_Wassalamualaikum Warahmatullahi Wabarakatuh_",
-    ].join("\n");
+  const text = [
+    "_Assalamualaikum Warahmatullahi Wabarakatuh_",
+    "",
+    `Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i *${guest.name}* untuk menghadiri acara kami.`,
+    "",
+    "*Berikut link undangan kami*, untuk info lengkap dari acara bisa kunjungi :",
+    "",
+    encodedInvitationUrl,
+    "",
+    "Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu kepada anak kami dalam acara khitan anak kami.",
+    "",
+    "*Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.*",
+    "",
+    "Terima kasih banyak atas perhatiannya.",
+    "",
+    "_Wassalamualaikum Warahmatullahi Wabarakatuh_",
+  ].join("\n");
 
     const fullUrl =
       `${baseUrl}?phone=${phone}&text=${encodeURIComponent(text)}`;
